@@ -13,11 +13,21 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @Configuration
 public class RepositoryConfig implements RepositoryRestConfigurer {
+
+    private String url = "http://localhost:3000";
+
     @Autowired
     private EntityManager entityManager;
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
+
+        // CORS configuration
+        // Cho phep FrontEnd call cac API tu BackEnd
+        cors.addMapping("/**")
+                .allowedOrigins(url)
+                .allowedMethods("GET", "POST", "PUT", "DELETE");
+
 
         // Cho phép trả về id
 
