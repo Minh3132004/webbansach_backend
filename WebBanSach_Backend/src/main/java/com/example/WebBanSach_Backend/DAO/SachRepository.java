@@ -12,3 +12,4 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface SachRepository extends JpaRepository<Sach, Integer> {
     Page<Sach> findByTenSachContaining(@RequestParam("tenSach") String tenSach , Pageable pageable);
 }
+
