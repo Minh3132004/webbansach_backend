@@ -17,7 +17,7 @@ public class RepositoryConfig implements RepositoryRestConfigurer {
     @Autowired
     private EntityManager entityManager;
 
-    private String url = "http://localhost:3000";
+//     private String url = "http://localhost:3000";
 
 
     @Override
@@ -25,16 +25,9 @@ public class RepositoryConfig implements RepositoryRestConfigurer {
 
         // CORS configuration
         // Cho phep FrontEnd call cac API tu BackEnd
-        cors.addMapping("/**")
-                .allowedOrigins(url)
-                .allowedMethods("GET", "POST", "PUT", "DELETE");
-
-
-        // CORS configuration
-        cors.addMapping("/**")
-                .allowedOrigins(url)
-                .allowedMethods("GET", "POST", "PUT", "DELETE");
-
+        // cors.addMapping("/**")
+        //         .allowedOrigins(url)
+        //         .allowedMethods("GET", "POST", "PUT", "DELETE");
 
         // Cho phép trả về id
 
@@ -46,31 +39,31 @@ public class RepositoryConfig implements RepositoryRestConfigurer {
 
 
         // Chặn các methods
-        HttpMethod[] chanCacPhuongThuc ={
-                HttpMethod.POST,
-                HttpMethod.PUT,
-                HttpMethod.PATCH,
-                HttpMethod.DELETE,
-        };
+        // HttpMethod[] chanCacPhuongThuc ={
+        //         HttpMethod.POST,
+        //         HttpMethod.PUT,
+        //         HttpMethod.PATCH,
+        //         HttpMethod.DELETE,
+        // };
 
         //Không thể thêm, sửa, xóa thể loại
 
-        disableHttpMethods(TheLoai.class, config, chanCacPhuongThuc);
+        // disableHttpMethods(TheLoai.class, config, chanCacPhuongThuc);
 
         // Chặn các method DELETE cho người dùng
-        HttpMethod[] phuongThucDelete = {
-                HttpMethod.DELETE
-        };
-        disableHttpMethods(NguoiDung.class, config,phuongThucDelete );
+        // HttpMethod[] phuongThucDelete = {
+        //         HttpMethod.DELETE
+        // };
+        // disableHttpMethods(NguoiDung.class, config,phuongThucDelete );
     }
 
-    private void disableHttpMethods(Class c,
-                                    RepositoryRestConfiguration config,
-                                    HttpMethod[] methods){
-        config.getExposureConfiguration()
-                .forDomainType(c)
-                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(methods))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(methods));
-    }
+//     private void disableHttpMethods(Class c,
+//                                     RepositoryRestConfiguration config,
+//                                     HttpMethod[] methods){
+//         config.getExposureConfiguration()
+//                 .forDomainType(c)
+//                 .withItemExposure((metdata, httpMethods) -> httpMethods.disable(methods))
+//                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(methods));
+//     }
 
 }

@@ -2,6 +2,7 @@ package com.example.WebBanSach_Backend.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.WebBanSach_Backend.DAO.NguoiDungRepository;
@@ -23,6 +24,7 @@ public class TaiKhoanService {
         {
             return ResponseEntity.badRequest().body("Email da ton tai");
         }
+
         nguoiDungRepository.save(nguoiDung);
         return ResponseEntity.ok().body("Dang ky thanh cong");
     }
