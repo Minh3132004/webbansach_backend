@@ -16,7 +16,7 @@ public class Quyen {
     @Column(name = "ten_quyen")
     private String tenQuyen;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
