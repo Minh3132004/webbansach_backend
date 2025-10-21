@@ -14,6 +14,9 @@ public class TaiKhoanService {
     @Autowired
     NguoiDungRepository nguoiDungRepository;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     public ResponseEntity<?> dangKyNguoiDung(NguoiDung nguoiDung)
     {
         if(nguoiDungRepository.existsByTenDangNhap(nguoiDung.getTenDangNhap()))
@@ -25,6 +28,11 @@ public class TaiKhoanService {
             return ResponseEntity.badRequest().body("Email da ton tai");
         }
 
+        //Mã hóa mật khẩu 
+        String matKhauMaHoa = bCryptPasswordEncoder.encode(nguoiDung.getMatKhau());
+        nguoiDung.setMatKhau(matKhauMaHoa);
+
+        //Lưu người dùng vào database
         nguoiDungRepository.save(nguoiDung);
         return ResponseEntity.ok().body("Dang ky thanh cong");
     }
