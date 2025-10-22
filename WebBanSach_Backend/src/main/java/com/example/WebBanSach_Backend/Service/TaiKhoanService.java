@@ -58,6 +58,24 @@ public class TaiKhoanService {
     public void guiEmailKichHoat(String email, String maKichHoat){
         String subject = "Kich hoat tai khoan tại WEB BÁN SÁCH";
         String text = "Vui lòng sử dụng mã sau để kích hoạt tài khoản : " + email + "\n" + "Mã kích hoạt: " + maKichHoat;
+        text += "Click vào đường link để kích hoạt tài khỏan : ";
+        text += "http://localhost:3000/kich-hoat/" + email + "/" + maKichHoat;
         emailService.sendMessage("de180352vubinhminh@gmail.com", email, subject, text);
+    }
+
+    public ResponseEntity<?> kichHoatTaiKhoan(String email, String maKichHoat){
+        NguoiDung nguoiDung = nguoiDungRepository.findByEmail(email);
+        if(nguoiDung == null){
+            return ResponseEntity.badRequest().body("Email khong ton tai");
+        }
+        if(nguoiDung.isDaKichHoat() == true){
+            return ResponseEntity.badRequest().body("Tai khoan da duoc kich hoat");
+        }
+        if(!nguoiDung.getMaKichHoat().equals(maKichHoat)){
+            return ResponseEntity.badRequest().body("Ma kich hoat khong chinh xac");
+        }
+        nguoiDung.setDaKichHoat(true);
+        nguoiDungRepository.save(nguoiDung);
+        return ResponseEntity.ok().body("Kich hoat tai khoan thanh cong");
     }
 }

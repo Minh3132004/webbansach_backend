@@ -13,6 +13,7 @@ public class Endpoints {
             "/hinh-anh/**",
             "/nguoi-dung/search/**",
             "/danh-gia/**",
+            "/tai-khoan/kich-hoat",
     };
 
     public static final String[] PUBLIC_POST_ENDPOINTS = {
