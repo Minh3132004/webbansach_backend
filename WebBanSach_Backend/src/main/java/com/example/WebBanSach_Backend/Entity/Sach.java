@@ -21,7 +21,7 @@ public class Sach {
     private String tenTacGia;
 
     @Column(name = "isbn", nullable = false)
-    private String ISBN;
+    private String isbn;
 
     @Column(name = "mo_ta", columnDefinition = "text" , nullable = false)
     private String moTa;
