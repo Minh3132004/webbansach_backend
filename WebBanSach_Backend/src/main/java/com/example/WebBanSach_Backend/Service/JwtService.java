@@ -61,12 +61,12 @@ public class JwtService  {
                 .setSubject(tenDangNhap)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+30*60*1000))
-                .signWith(SignatureAlgorithm.HS256, getSignKeỵ̣())
+                .signWith(SignatureAlgorithm.HS256, getSignKey())
                 .compact();
     }
 
     //Lấy secret key
-    private Key getSignKeỵ̣(){
+    private Key getSignKey(){
         byte[] keyBytes = Decoders.BASE64.decode(SECRET);
         return Keys.hmacShaKeyFor(keyBytes);
     }
@@ -74,7 +74,7 @@ public class JwtService  {
     //Trích xuất thông tin
 
     private Claims extractAllClaims(String token){
-        return Jwts.parser().setSigningKey(getSignKeỵ̣()).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(getSignKey()).parseClaimsJws(token).getBody();
     }
 
     //Trích xuất thông tin cho 1 claim
